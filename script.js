@@ -1,6 +1,8 @@
 const username = "soojinme";
 const repo = "boxx";
 
+const downloadBtn = () => document.querySelector(".top-right .btn");
+
 async function loadFiles() {
   const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/files`);
   const files = await res.json();
@@ -35,6 +37,8 @@ async function loadFiles() {
 
     list.appendChild(div);
   }
+
+  updateSelectedCount(); // 초기 상태
 }
 
 function toggleAll(master) {
@@ -50,6 +54,10 @@ function toggleAll(master) {
 function updateSelectedCount() {
   const checked = document.querySelectorAll(".file-check:checked");
   document.getElementById("selectedCount").innerText = `${checked.length}개 선택`;
+
+  // 🔥 버튼 활성/비활성
+  const btn = downloadBtn();
+  btn.disabled = checked.length === 0;
 }
 
 function downloadSelected() {
