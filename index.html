@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>My Files</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .container {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+
+    .file {
+      margin: 15px 0;
+    }
+
+    a {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      background: white;
+      color: #333;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    a:hover {
+      background: #ffd369;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>📂 파일 다운로드</h1>
+
+  <div class="container">
+    <div class="file">
+      <a href="file1.zip" download>📦 파일 1 다운로드</a>
+    </div>
+
+    <div class="file">
+      <a href="file2.pdf" download>📄 파일 2 다운로드</a>
+    </div>
+
+    <div class="file">
+      <a href="image.png" download>🖼️ 이미지 다운로드</a>
+    </div>
+  </div>
+</body>
+</html>
