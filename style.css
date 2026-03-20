@@ -31,7 +31,7 @@ body {
   gap: 10px;
 }
 
-/* 🔥 버튼 통일 */
+/* 버튼 */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -40,9 +40,9 @@ body {
   padding: 0 14px;
   border-radius: 8px;
   font-size: 13px;
-  text-decoration: none;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 
   background: #111;
   color: white;
@@ -52,31 +52,6 @@ body {
   background: #333;
 }
 
-.btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-/* 기본 버튼 */
-.btn {
-  background: #111;
-  color: white;
-}
-
-.btn:hover {
-  background: #333;
-}
-
-.download {
-  background: #111;
-  color: white;
-}
-
-.download:hover {
-  background: #333;
-}
-
-/* 비활성화 */
 .btn:disabled {
   background: #ccc;
   cursor: not-allowed;
@@ -109,19 +84,13 @@ body {
   gap: 10px;
 }
 
-.file-info {
-  display: flex;
-  flex-direction: column;
+.file-name {
+  font-weight: 500;
 }
 
-.time {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-/* 🔥 체크박스 크기 */
+/* 체크박스 (Safari 포함 대응) */
 input[type="checkbox"] {
-  -webkit-appearance: none; /* 🔥 Safari 필수 */
+  -webkit-appearance: none;
   appearance: none;
 
   width: 18px;
@@ -149,10 +118,6 @@ input[type="checkbox"]:checked::after {
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
-}
-
-input[type="checkbox"] {
-  display: inline-block;
 }
 
 @media (max-width: 500px) {
