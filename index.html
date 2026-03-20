@@ -2,65 +2,66 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>My Files</title>
+  <title>My File Server</title>
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      font-family: Arial;
+      background: #0f172a;
       color: white;
-      text-align: center;
-      padding: 50px;
+      padding: 40px;
     }
 
-    h1 {
-      margin-bottom: 30px;
-    }
-
-    .container {
-      background: rgba(255,255,255,0.1);
-      padding: 30px;
-      border-radius: 15px;
-      display: inline-block;
-      backdrop-filter: blur(10px);
+    .box {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
     }
 
     .file {
-      margin: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #334155;
     }
 
-    a {
-      display: inline-block;
-      padding: 12px 20px;
-      border-radius: 10px;
+    .download {
+      background: #38bdf8;
+      color: black;
+      padding: 5px 10px;
+      border-radius: 6px;
       text-decoration: none;
-      background: white;
-      color: #333;
-      font-weight: bold;
-      transition: 0.2s;
-    }
-
-    a:hover {
-      background: #ffd369;
-      transform: scale(1.05);
     }
   </style>
 </head>
 
 <body>
-  <h1>📂 파일 다운로드</h1>
+  <h1>📂 파일 목록</h1>
 
-  <div class="container">
-    <div class="file">
-      <a href="file1.zip" download>📦 파일 1 다운로드</a>
-    </div>
+  <div class="box" id="fileList"></div>
 
-    <div class="file">
-      <a href="file2.pdf" download>📄 파일 2 다운로드</a>
-    </div>
+  <script>
+    const files = [
+      "file1.zip",
+      "file2.pdf",
+      "image.png"
+    ];
 
-    <div class="file">
-      <a href="image.png" download>🖼️ 이미지 다운로드</a>
-    </div>
-  </div>
+    const list = document.getElementById("fileList");
+
+    files.forEach(file => {
+      const div = document.createElement("div");
+      div.className = "file";
+
+      div.innerHTML = `
+        <div>${file}</div>
+        <a class="download" href="files/${file}" download>다운로드</a>
+      `;
+
+      list.appendChild(div);
+    });
+  </script>
+
 </body>
 </html>
