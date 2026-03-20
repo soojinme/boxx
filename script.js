@@ -22,21 +22,38 @@ async function loadFiles() {
 
     div.innerHTML = `
       <div class="left">
-        <input type="checkbox" value="${file.download_url}">
-        <div>
+        <input type="checkbox" class="file-check" value="${file.download_url}" onchange="updateSelectedCount()">
+
+        <div class="file-info">
           <div>${file.name}</div>
           <div class="time">${formatted}</div>
         </div>
       </div>
-      <a class="btn" href="${file.download_url}">Download</a>
+
+      <a class="download" href="${file.download_url}">Download</a>
     `;
 
     list.appendChild(div);
   }
 }
 
+function toggleAll(master) {
+  const checkboxes = document.querySelectorAll(".file-check");
+
+  checkboxes.forEach(cb => {
+    cb.checked = master.checked;
+  });
+
+  updateSelectedCount();
+}
+
+function updateSelectedCount() {
+  const checked = document.querySelectorAll(".file-check:checked");
+  document.getElementById("selectedCount").innerText = `${checked.length}개 선택`;
+}
+
 function downloadSelected() {
-  const checked = document.querySelectorAll("input[type=checkbox]:checked");
+  const checked = document.querySelectorAll(".file-check:checked");
 
   checked.forEach((el, index) => {
     setTimeout(() => {
@@ -46,8 +63,10 @@ function downloadSelected() {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    }, index * 500);
+    }, index * 400);
   });
 }
 
-loadFiles();
+loadFiles().catch(() => {
+  document.getElementById("fileList").innerText = "Failed to load";
+});
