@@ -46,6 +46,10 @@ body {
   cursor: pointer;
 }
 
+.download {
+  text-decoration: none;
+}
+
 /* 기본 버튼 */
 .btn {
   background: #111;
@@ -111,9 +115,31 @@ body {
 
 /* 🔥 체크박스 크기 */
 input[type="checkbox"] {
+  appearance: none;
   width: 18px;
   height: 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
   cursor: pointer;
+  position: relative;
+  background: white;
+}
+
+input[type="checkbox"]:checked {
+  background: #111;
+  border-color: #111;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 @media (max-width: 500px) {
