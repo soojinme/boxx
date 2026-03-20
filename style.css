@@ -32,8 +32,7 @@ body {
 }
 
 /* 🔥 버튼 통일 */
-.btn,
-.download {
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -44,10 +43,18 @@ body {
   text-decoration: none;
   border: none;
   cursor: pointer;
+
+  background: #111;
+  color: white;
 }
 
-.download {
-  text-decoration: none;
+.btn:hover {
+  background: #333;
+}
+
+.btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
 
 /* 기본 버튼 */
