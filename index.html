@@ -35,40 +35,46 @@
     .item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 14px 16px;
       border-bottom: 1px solid #f1f5f9;
       font-size: 14px;
     }
 
-    .item:last-child {
-      border-bottom: none;
+    .left {
+      display: flex;
+      flex-direction: column;
     }
 
     .name {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    a {
-      color: #2563eb;
-      text-decoration: none;
       font-weight: 500;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .time {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 2px;
     }
 
-    /* 📱 반응형 */
+    .btn {
+      background: #111;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #333;
+    }
+
     @media (max-width: 500px) {
       .item {
         flex-direction: column;
-        gap: 6px;
-      }
-
-      a {
-        align-self: flex-start;
+        align-items: flex-start;
+        gap: 8px;
       }
     }
   </style>
@@ -78,37 +84,48 @@
 
   <div class="container">
     <h1>Files</h1>
-
-    <div class="card" id="fileList">
-      Loading...
-    </div>
+    <div class="card" id="fileList">Loading...</div>
   </div>
 
   <script>
     const username = "soojinme";
     const repo = "boxx";
 
-    fetch(`https://api.github.com/repos/${username}/${repo}/contents/files`)
-      .then(res => res.json())
-      .then(data => {
-        const list = document.getElementById("fileList");
-        list.innerHTML = "";
+    async function loadFiles() {
+      const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/files`);
+      const files = await res.json();
 
-        data.forEach(file => {
-          const div = document.createElement("div");
-          div.className = "item";
+      const list = document.getElementById("fileList");
+      list.innerHTML = "";
 
-          div.innerHTML = `
+      for (const file of files) {
+        // commit 정보 가져오기
+        const commitRes = await fetch(
+          `https://api.github.com/repos/${username}/${repo}/commits?path=files/${file.name}&per_page=1`
+        );
+        const commitData = await commitRes.json();
+
+        const date = new Date(commitData[0].commit.committer.date);
+        const formatted = date.toLocaleString();
+
+        const div = document.createElement("div");
+        div.className = "item";
+
+        div.innerHTML = `
+          <div class="left">
             <div class="name">${file.name}</div>
-            <a href="${file.download_url}">Download</a>
-          `;
+            <div class="time">${formatted}</div>
+          </div>
+          <a class="btn" href="${file.download_url}">Download</a>
+        `;
 
-          list.appendChild(div);
-        });
-      })
-      .catch(() => {
-        document.getElementById("fileList").innerText = "Failed to load";
-      });
+        list.appendChild(div);
+      }
+    }
+
+    loadFiles().catch(() => {
+      document.getElementById("fileList").innerText = "Failed to load";
+    });
   </script>
 
 </body>
