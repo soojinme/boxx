@@ -66,16 +66,6 @@ body {
   cursor: not-allowed;
 }
 
-/* 다운로드 버튼 (리스트용) */
-.download {
-  background: #f1f5f9;
-  color: #111;
-}
-
-.download:hover {
-  background: #e2e8f0;
-}
-
 /* 카드 */
 .card {
   background: white;
