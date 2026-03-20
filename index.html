@@ -2,38 +2,52 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Files</title>
 
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial;
-      background: #ffffff;
-      color: #111;
       margin: 0;
-      padding: 40px;
+      background: #fafafa;
+      color: #111;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
     }
 
     h1 {
-      font-size: 20px;
-      margin-bottom: 20px;
+      font-size: 18px;
       font-weight: 600;
+      margin-bottom: 20px;
     }
 
-    .list {
-      max-width: 700px;
-      border-top: 1px solid #e5e7eb;
+    .card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
     }
 
     .item {
       display: flex;
       justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid #e5e7eb;
+      padding: 14px 16px;
+      border-bottom: 1px solid #f1f5f9;
       font-size: 14px;
     }
 
+    .item:last-child {
+      border-bottom: none;
+    }
+
     .name {
-      color: #111;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     a {
@@ -45,13 +59,30 @@
     a:hover {
       text-decoration: underline;
     }
+
+    /* 📱 반응형 */
+    @media (max-width: 500px) {
+      .item {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      a {
+        align-self: flex-start;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <h1>Files</h1>
-  <div class="list" id="fileList">Loading...</div>
+  <div class="container">
+    <h1>Files</h1>
+
+    <div class="card" id="fileList">
+      Loading...
+    </div>
+  </div>
 
   <script>
     const username = "soojinme";
