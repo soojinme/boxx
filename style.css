@@ -31,20 +31,48 @@ body {
   gap: 10px;
 }
 
+/* 🔥 버튼 통일 */
+.btn,
+.download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 기본 버튼 */
 .btn {
   background: #111;
   color: white;
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
 }
 
 .btn:hover {
   background: #333;
 }
 
+/* 비활성화 */
+.btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* 다운로드 버튼 (리스트용) */
+.download {
+  background: #f1f5f9;
+  color: #111;
+}
+
+.download:hover {
+  background: #e2e8f0;
+}
+
+/* 카드 */
 .card {
   background: white;
   border: 1px solid #e5e7eb;
@@ -81,14 +109,11 @@ body {
   color: #6b7280;
 }
 
-.download {
-  color: #2563eb;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.download:hover {
-  text-decoration: underline;
+/* 🔥 체크박스 크기 */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
 }
 
 @media (max-width: 500px) {
