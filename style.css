@@ -115,9 +115,12 @@ body {
 
 /* 🔥 체크박스 크기 */
 input[type="checkbox"] {
+  -webkit-appearance: none; /* 🔥 Safari 필수 */
   appearance: none;
+
   width: 18px;
   height: 18px;
+
   border: 1px solid #cbd5e1;
   border-radius: 4px;
   cursor: pointer;
@@ -140,6 +143,10 @@ input[type="checkbox"]:checked::after {
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+input[type="checkbox"] {
+  display: inline-block;
 }
 
 @media (max-width: 500px) {
