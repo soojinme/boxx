@@ -2,65 +2,82 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>My File Server</title>
+  <title>Files</title>
 
   <style>
     body {
-      font-family: Arial;
-      background: #0f172a;
-      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial;
+      background: #ffffff;
+      color: #111;
+      margin: 0;
       padding: 40px;
     }
 
-    .box {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 600px;
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      font-weight: 600;
     }
 
-    .file {
+    .list {
+      max-width: 700px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .item {
       display: flex;
       justify-content: space-between;
-      padding: 10px;
-      border-bottom: 1px solid #334155;
+      padding: 12px 0;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 14px;
     }
 
-    .download {
-      background: #38bdf8;
-      color: black;
-      padding: 5px 10px;
-      border-radius: 6px;
+    .name {
+      color: #111;
+    }
+
+    a {
+      color: #2563eb;
       text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
-  <h1>📂 파일 목록</h1>
 
-  <div class="box" id="fileList"></div>
+  <h1>Files</h1>
+  <div class="list" id="fileList">Loading...</div>
 
   <script>
-    const files = [
-      "file1.zip",
-      "file2.pdf",
-      "image.png"
-    ];
+    const username = "soojinme";
+    const repo = "boxx";
 
-    const list = document.getElementById("fileList");
+    fetch(`https://api.github.com/repos/${username}/${repo}/contents/files`)
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById("fileList");
+        list.innerHTML = "";
 
-    files.forEach(file => {
-      const div = document.createElement("div");
-      div.className = "file";
+        data.forEach(file => {
+          const div = document.createElement("div");
+          div.className = "item";
 
-      div.innerHTML = `
-        <div>${file}</div>
-        <a class="download" href="files/${file}" download>다운로드</a>
-      `;
+          div.innerHTML = `
+            <div class="name">${file.name}</div>
+            <a href="${file.download_url}">Download</a>
+          `;
 
-      list.appendChild(div);
-    });
+          list.appendChild(div);
+        });
+      })
+      .catch(() => {
+        document.getElementById("fileList").innerText = "Failed to load";
+      });
   </script>
 
 </body>
