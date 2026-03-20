@@ -10,15 +10,24 @@
 
 <body>
 
-  <div class="container">
-    <div class="topbar">
-      <h3>Files</h3>
-      <button class="btn" onclick="downloadSelected()">Download Selected</button>
+<div class="container">
+
+  <div class="topbar">
+    <div class="top-left">
+      <input type="checkbox" id="selectAll" onchange="toggleAll(this)">
+      <label for="selectAll">전체 선택</label>
     </div>
 
-    <div class="card" id="fileList">Loading...</div>
+    <div class="top-right">
+      <span id="selectedCount">0개 선택</span>
+      <button class="btn" onclick="downloadSelected()">Download</button>
+    </div>
   </div>
 
-  <script src="script.js"></script>
+  <div class="card" id="fileList">Loading...</div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
