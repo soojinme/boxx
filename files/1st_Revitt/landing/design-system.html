@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440, initial-scale=1.0">
+<title>Revitt Design System v1</title>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#F2F2F7;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;padding:48px;color:#111;}
+
+  /* SECTION */
+  .section{margin-bottom:56px;}
+  .section-title{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid #DDD;}
+  .row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;}
+
+  /* PAGE TITLE */
+  .page-title{font-size:32px;font-weight:900;letter-spacing:-0.03em;margin-bottom:4px;}
+  .page-sub{font-size:14px;color:#888;margin-bottom:48px;}
+
+  /* COLOR TOKENS */
+  .color-swatch{width:80px;}
+  .swatch-box{height:80px;border-radius:16px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);}
+  .swatch-name{font-size:11px;font-weight:700;color:#333;}
+  .swatch-hex{font-size:10px;color:#888;font-family:monospace;}
+
+  /* TYPOGRAPHY */
+  .type-row{padding:16px 20px;background:#fff;border-radius:12px;border:1px solid #E8E8E8;margin-bottom:8px;display:flex;align-items:baseline;gap:20px;}
+  .type-label{font-size:10px;color:#888;width:100px;flex-shrink:0;font-family:monospace;}
+  .type-spec{font-size:10px;color:#bbb;width:140px;flex-shrink:0;font-family:monospace;}
+
+  /* SPACING */
+  .space-item{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+  .space-bar{background:#FF6B2B;height:24px;border-radius:4px;opacity:0.8;}
+  .space-label{font-size:11px;color:#555;font-family:monospace;width:40px;}
+  .space-px{font-size:11px;color:#888;}
+
+  /* RADIUS */
+  .radius-item{width:100px;text-align:center;}
+  .radius-box{background:#fff;border:2px solid #222;height:80px;margin-bottom:8px;}
+  .radius-label{font-size:11px;font-weight:700;}
+  .radius-val{font-size:10px;color:#888;font-family:monospace;}
+
+  /* COMPONENTS */
+  .comp-card{background:#fff;border-radius:16px;padding:24px;border:1px solid #E8E8E8;}
+  .comp-label{font-size:10px;font-weight:700;color:#aaa;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+
+  /* BUTTONS */
+  .btn{display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-weight:700;cursor:pointer;border:none;}
+  .btn-primary{background:#FF6B2B;color:#fff;border-radius:16px;padding:15px 28px;font-size:16px;box-shadow:0 4px 16px rgba(255,107,43,0.3);}
+  .btn-secondary{background:#F2F2F7;color:#111;border-radius:16px;padding:15px 28px;font-size:16px;border:1px solid #E0E0E0;}
+  .btn-ghost{background:transparent;color:#FF6B2B;border-radius:16px;padding:15px 28px;font-size:16px;border:1.5px solid #FF6B2B;}
+  .btn-sm{border-radius:12px;padding:10px 20px;font-size:14px;}
+  .btn-xs{border-radius:100px;padding:7px 16px;font-size:12px;}
+  .btn-danger{background:#FF3B30;color:#fff;border-radius:16px;padding:15px 28px;font-size:16px;}
+
+  /* CHIPS */
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:100px;font-size:13px;font-weight:500;border:1.5px solid #E0E0E0;color:#555;background:#fff;}
+  .chip.active{background:#FF6B2B;border-color:#FF6B2B;color:#fff;font-weight:700;}
+  .chip.outline{border-color:#111;color:#111;}
+
+  /* CARDS */
+  .review-card{background:#fff;border-radius:20px;overflow:hidden;border:1px solid #F0F0F0;width:280px;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+  .card-img-placeholder{height:160px;background:#F2F2F7;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;}
+  .card-body{padding:14px;}
+  .card-user-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .card-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;}
+  .card-name{font-size:13px;font-weight:700;}
+  .card-time{font-size:11px;color:#aaa;}
+  .card-text{font-size:12px;color:#555;line-height:1.5;margin-bottom:10px;}
+  .card-reactions{display:flex;gap:6px;}
+  .reaction{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:100px;font-size:11px;font-weight:500;border:1px solid #E8E8E8;color:#666;}
+  .reaction.active{border-color:#FF6B2B;background:#FFF3EE;color:#FF6B2B;}
+
+  /* SHARE BADGE */
+  .share-badge{position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,0.92);border:1px solid #E0E0E0;border-radius:100px;padding:5px 12px;font-size:11px;font-weight:700;backdrop-filter:blur(8px);}
+
+  /* MOOD BANNER */
+  .mood-banner{background:#FFF3EE;border:1.5px solid #FFD4BE;border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;width:100%;}
+  .mood-text{font-size:13px;color:#333;line-height:1.4;}
+  .mood-text strong{font-weight:700;color:#FF6B2B;}
+
+  /* INPUTS */
+  .input{background:#F7F7F9;border:1.5px solid #E8E8E8;border-radius:12px;padding:13px 16px;font-size:14px;color:#111;font-family:inherit;width:100%;}
+  .input:focus{outline:none;border-color:#FF6B2B;}
+  .input-search{display:flex;align-items:center;gap:10px;background:#F7F7F9;border:1.5px solid #E8E8E8;border-radius:100px;padding:11px 16px;}
+  .input-search input{background:transparent;border:none;outline:none;font-size:14px;font-family:inherit;color:#111;flex:1;}
+
+  /* AVATAR */
+  .avatar-lg{width:72px;height:72px;border-radius:50%;border:3px solid #FF6B2B;display:flex;align-items:center;justify-content:center;font-size:32px;}
+  .avatar-md{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid #E8E8E8;}
+  .avatar-sm{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;border:1px solid #E8E8E8;}
+  .avatar-a{background:linear-gradient(135deg,#FFE0D0,#FFB899);}
+  .avatar-b{background:linear-gradient(135deg,#E0D5FF,#C4B0FF);}
+  .avatar-c{background:linear-gradient(135deg,#D0F5EC,#9FEDDA);}
+
+  /* BADGE */
+  .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;}
+  .badge-cat{background:#FFF3EE;color:#FF6B2B;}
+  .badge-live{background:#FF3B30;color:#fff;}
+  .badge-title{background:#F0EBFF;color:#7B4FFF;}
+  .badge-new{background:#E8F9F2;color:#00C07A;}
+
+  /* BOTTOM NAV */
+  .bottom-nav{display:flex;background:#fff;border-top:1px solid #E8E8E8;border-radius:0 0 20px 20px;overflow:hidden;width:375px;}
+  .nav-item{flex:1;padding:10px 4px 14px;text-align:center;font-size:10px;color:#aaa;font-weight:500;}
+  .nav-item.active{color:#FF6B2B;font-weight:700;}
+  .nav-icon{font-size:22px;display:block;margin-bottom:2px;}
+  .nav-cta-wrap{flex:1;padding:6px 4px 14px;text-align:center;font-size:10px;font-weight:700;color:#111;}
+  .nav-cta-btn{width:48px;height:48px;background:#FF6B2B;border-radius:50%;margin:-18px auto 4px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;box-shadow:0 4px 16px rgba(255,107,43,0.4);}
+
+  /* TIME THEME */
+  .theme-card{width:120px;border-radius:16px;overflow:hidden;border:1px solid #E8E8E8;}
+  .theme-header{height:60px;display:flex;align-items:center;justify-content:center;font-size:24px;}
+  .theme-body{padding:10px;background:#fff;}
+  .theme-name{font-size:12px;font-weight:700;margin-bottom:2px;}
+  .theme-time{font-size:10px;color:#888;}
+  .theme-color{font-size:10px;font-family:monospace;color:#555;}
+</style>
+</head>
+<body>
+
+<div class="page-title">Revitt Design System</div>
+<div class="page-sub">v1.0 · Light Mode · Pretendard · 2026</div>
+
+<!-- COLOR -->
+<div class="section">
+  <div class="section-title">Color Tokens</div>
+
+  <div style="margin-bottom:20px;">
+    <div style="font-size:11px;font-weight:700;color:#aaa;margin-bottom:12px;">Brand</div>
+    <div class="row">
+      <div class="color-swatch"><div class="swatch-box" style="background:#FF6B2B;"></div><div class="swatch-name">Primary</div><div class="swatch-hex">#FF6B2B</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#FF9F6B;"></div><div class="swatch-name">Primary Light</div><div class="swatch-hex">#FF9F6B</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#FFF3EE;"></div><div class="swatch-name">Primary BG</div><div class="swatch-hex">#FFF3EE</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#CC5522;"></div><div class="swatch-name">Primary Dark</div><div class="swatch-hex">#CC5522</div></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:20px;">
+    <div style="font-size:11px;font-weight:700;color:#aaa;margin-bottom:12px;">Time Theme</div>
+    <div class="row">
+      <div class="color-swatch"><div class="swatch-box" style="background:#B8FF4F;"></div><div class="swatch-name">Morning</div><div class="swatch-hex">#B8FF4F · 오전</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#FF6B2B;"></div><div class="swatch-name">Afternoon</div><div class="swatch-hex">#FF6B2B · 오후</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#7B4FFF;"></div><div class="swatch-name">Evening</div><div class="swatch-hex">#7B4FFF · 저녁</div></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:20px;">
+    <div style="font-size:11px;font-weight:700;color:#aaa;margin-bottom:12px;">Neutral (Light Mode)</div>
+    <div class="row">
+      <div class="color-swatch"><div class="swatch-box" style="background:#111111;"></div><div class="swatch-name">Gray 900</div><div class="swatch-hex">#111111</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#333333;"></div><div class="swatch-name">Gray 700</div><div class="swatch-hex">#333333</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#777777;"></div><div class="swatch-name">Gray 500</div><div class="swatch-hex">#777777</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#AAAAAA;"></div><div class="swatch-name">Gray 300</div><div class="swatch-hex">#AAAAAA</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#E0E0E0;"></div><div class="swatch-name">Gray 200</div><div class="swatch-hex">#E0E0E0</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#F2F2F7;"></div><div class="swatch-name">Gray 100</div><div class="swatch-hex">#F2F2F7</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#FFFFFF;border:1px solid #E0E0E0;"></div><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div></div>
+    </div>
+  </div>
+
+  <div>
+    <div style="font-size:11px;font-weight:700;color:#aaa;margin-bottom:12px;">Semantic</div>
+    <div class="row">
+      <div class="color-swatch"><div class="swatch-box" style="background:#FF3B30;"></div><div class="swatch-name">Error</div><div class="swatch-hex">#FF3B30</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#00C07A;"></div><div class="swatch-name">Success</div><div class="swatch-hex">#00C07A</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#FFB800;"></div><div class="swatch-name">Warning</div><div class="swatch-hex">#FFB800</div></div>
+      <div class="color-swatch"><div class="swatch-box" style="background:#0A84FF;"></div><div class="swatch-name">Info</div><div class="swatch-hex">#0A84FF</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="section">
+  <div class="section-title">Typography — Pretendard</div>
+  <div style="display:flex;flex-direction:column;gap:0;">
+    <div class="type-row"><span class="type-label">Display</span><span class="type-spec">32px / 900 / -0.03em</span><span style="font-size:32px;font-weight:900;letter-spacing:-0.03em;">세상은 나 혼자가 아니다</span></div>
+    <div class="type-row"><span class="type-label">Heading 1</span><span class="type-spec">24px / 700 / -0.02em</span><span style="font-size:24px;font-weight:700;letter-spacing:-0.02em;">지금 이 순간의 리뷰</span></div>
+    <div class="type-row"><span class="type-label">Heading 2</span><span class="type-spec">20px / 700 / -0.01em</span><span style="font-size:20px;font-weight:700;letter-spacing:-0.01em;">실시간 피드</span></div>
+    <div class="type-row"><span class="type-label">Heading 3</span><span class="type-spec">18px / 600</span><span style="font-size:18px;font-weight:600;">카테고리 선택</span></div>
+    <div class="type-row"><span class="type-label">Body L</span><span class="type-spec">16px / 400 / 1.6</span><span style="font-size:16px;font-weight:400;line-height:1.6;">비가 오는 날 혼자 먹는 라멘은 왜 이렇게 완벽하지</span></div>
+    <div class="type-row"><span class="type-label">Body M</span><span class="type-spec">14px / 400 / 1.6</span><span style="font-size:14px;font-weight:400;line-height:1.6;">국물이 진짜 말이 안 됨. 돼지뼈를 12시간 이상 우려낸 진한 국물</span></div>
+    <div class="type-row"><span class="type-label">Body S</span><span class="type-spec">13px / 400 / 1.5</span><span style="font-size:13px;font-weight:400;line-height:1.5;">방금 · 마포구 합정동 · 음식 리뷰</span></div>
+    <div class="type-row"><span class="type-label">Caption</span><span class="type-spec">11px / 500 / 1.4</span><span style="font-size:11px;font-weight:500;line-height:1.4;color:#888;">상위 8% · 맛집 탐험가 · 30개 리뷰</span></div>
+    <div class="type-row"><span class="type-label">Label</span><span class="type-spec">11px / 700 / 0.08em UC</span><span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;">CATEGORY · LIVE · NOW</span></div>
+  </div>
+</div>
+
+<!-- SPACING -->
+<div class="section">
+  <div class="section-title">Spacing (4px Base Unit)</div>
+  <div style="background:#fff;border-radius:16px;padding:24px;border:1px solid #E8E8E8;">
+    <div class="space-item"><div class="space-bar" style="width:4px;"></div><span class="space-label">4px</span><span class="space-px">xs — 아이콘 내부 간격</span></div>
+    <div class="space-item"><div class="space-bar" style="width:8px;"></div><span class="space-label">8px</span><span class="space-px">sm — 인라인 요소 간격</span></div>
+    <div class="space-item"><div class="space-bar" style="width:12px;"></div><span class="space-label">12px</span><span class="space-px">md — 컴포넌트 내부</span></div>
+    <div class="space-item"><div class="space-bar" style="width:16px;"></div><span class="space-label">16px</span><span class="space-px">lg — 섹션 간격, 패딩</span></div>
+    <div class="space-item"><div class="space-bar" style="width:20px;"></div><span class="space-label">20px</span><span class="space-px">xl — 화면 좌우 여백</span></div>
+    <div class="space-item"><div class="space-bar" style="width:24px;"></div><span class="space-label">24px</span><span class="space-px">2xl — 카드 간격</span></div>
+    <div class="space-item"><div class="space-bar" style="width:32px;"></div><span class="space-label">32px</span><span class="space-px">3xl — 섹션 간격</span></div>
+    <div class="space-item"><div class="space-bar" style="width:48px;"></div><span class="space-label">48px</span><span class="space-px">4xl — 페이지 상단 여백</span></div>
+  </div>
+</div>
+
+<!-- BORDER RADIUS -->
+<div class="section">
+  <div class="section-title">Border Radius</div>
+  <div class="row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:4px;"></div><div class="radius-label">XS</div><div class="radius-val">4px · 뱃지</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:8px;"></div><div class="radius-label">SM</div><div class="radius-val">8px · 이미지</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:12px;"></div><div class="radius-label">MD</div><div class="radius-val">12px · 인풋</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:16px;"></div><div class="radius-label">LG</div><div class="radius-val">16px · 버튼</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:20px;"></div><div class="radius-label">XL</div><div class="radius-val">20px · 카드</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:100px;"></div><div class="radius-label">Pill</div><div class="radius-val">100px · 칩/태그</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:50%;width:80px;"></div><div class="radius-label">Circle</div><div class="radius-val">50% · 아바타</div></div>
+  </div>
+</div>
+
+<!-- BUTTONS -->
+<div class="section">
+  <div class="section-title">Buttons</div>
+  <div class="row">
+    <div class="comp-card">
+      <div class="comp-label">Primary</div>
+      <div class="row" style="gap:12px;align-items:center;">
+        <button class="btn btn-primary">리뷰 올리기</button>
+        <button class="btn btn-primary btn-sm">시작하기</button>
+        <button class="btn btn-primary btn-xs">팔로우</button>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-label">Secondary</div>
+      <div class="row" style="gap:12px;align-items:center;">
+        <button class="btn btn-secondary">프로필 수정</button>
+        <button class="btn btn-secondary btn-sm">취소</button>
+        <button class="btn btn-secondary btn-xs">더보기</button>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-label">Ghost / Danger</div>
+      <div class="row" style="gap:12px;align-items:center;">
+        <button class="btn btn-ghost">둘러보기</button>
+        <button class="btn btn-danger btn-sm">신고하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHIPS & BADGES -->
+<div class="section">
+  <div class="section-title">Chips & Badges</div>
+  <div class="row">
+    <div class="comp-card">
+      <div class="comp-label">Category Chips</div>
+      <div class="row" style="gap:8px;">
+        <span class="chip active">전체</span>
+        <span class="chip">🍜 음식</span>
+        <span class="chip">🎬 영화</span>
+        <span class="chip">📚 도서</span>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-label">Badges</div>
+      <div class="row" style="gap:8px;">
+        <span class="badge badge-live">● LIVE</span>
+        <span class="badge badge-cat">🍜 음식</span>
+        <span class="badge badge-title">맛집 탐험가</span>
+        <span class="badge badge-new">NEW</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="section">
+  <div class="section-title">Review Card</div>
+  <div class="row">
+    <div class="review-card">
+      <div class="card-img-placeholder">
+        🍜
+        <div class="share-badge">🔥 온세상이 알아야 해</div>
+      </div>
+      <div class="card-body">
+        <div class="card-user-row">
+          <div class="card-avatar avatar-a">🐰</div>
+          <div>
+            <div class="card-name">취향탐험가</div>
+            <div class="card-time">방금 · 마포구</div>
+          </div>
+          <span class="badge badge-cat" style="margin-left:auto;">🍜 음식</span>
+        </div>
+        <div class="card-text">비가 오는 날 혼자 먹는 라멘은 왜 이렇게 완벽하지 🌧️</div>
+        <div class="card-reactions">
+          <div class="reaction active">🙋 나도! 42</div>
+          <div class="reaction">✅ 18</div>
+          <div class="reaction">📌 97</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <!-- MOOD BANNER -->
+      <div class="comp-card" style="width:320px;">
+        <div class="comp-label">Mood Banner</div>
+        <div class="mood-banner">
+          <span style="font-size:22px;">🌧️</span>
+          <div class="mood-text"><strong>비 오는 밤, 다들 라멘 먹는 중</strong><br>지금 이 순간 서울 · 247명 리뷰 중</div>
+        </div>
+      </div>
+      <!-- SHARE OPTIONS -->
+      <div class="comp-card" style="width:320px;">
+        <div class="comp-label">Share Level</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;border:1.5px solid #E0E0E0;background:#FAFAFA;">
+            <span style="font-size:20px;">🤫</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;">나만 알고 싶어</div><div style="font-size:11px;color:#aaa;">숨겨진 보석</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;border:1.5px solid #FF6B2B;background:#FFF3EE;">
+            <span style="font-size:20px;">📢</span><div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#FF6B2B;">다 알았으면 좋겠어</div><div style="font-size:11px;color:#FF9F6B;">선택됨</div></div>
+            <span style="color:#FF6B2B;font-weight:bold;">✓</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;border:1.5px solid #E0E0E0;background:#FAFAFA;">
+            <span style="font-size:20px;">🔥</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;">온 세상이 알아야 해</div><div style="font-size:11px;color:#aaa;">레전드</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AVATARS & INPUTS -->
+<div class="section">
+  <div class="section-title">Avatars & Inputs</div>
+  <div class="row">
+    <div class="comp-card">
+      <div class="comp-label">Avatars</div>
+      <div class="row" style="align-items:center;gap:16px;">
+        <div class="avatar-lg avatar-a">🐰</div>
+        <div class="avatar-md avatar-b">🎬</div>
+        <div class="avatar-sm avatar-c">📚</div>
+      </div>
+    </div>
+    <div class="comp-card" style="flex:1;min-width:280px;">
+      <div class="comp-label">Inputs</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <input class="input" placeholder="이메일 주소를 입력해주세요">
+        <div class="input-search"><span>🔍</span><input placeholder="어떤 리뷰를 찾고 계세요?"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV & TIME THEME -->
+<div class="section">
+  <div class="section-title">Bottom Navigation & Time Theme</div>
+  <div class="row" style="align-items:flex-start;gap:32px;">
+    <div>
+      <div class="comp-label" style="font-size:10px;font-weight:700;color:#aaa;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;">Bottom Navigation</div>
+      <div class="bottom-nav">
+        <div class="nav-item active"><span class="nav-icon">🏠</span>홈</div>
+        <div class="nav-item"><span class="nav-icon">🔭</span>둘러보기</div>
+        <div class="nav-cta-wrap"><div class="nav-cta-btn">+</div>리뷰</div>
+        <div class="nav-item"><span class="nav-icon">🔍</span>검색</div>
+        <div class="nav-item"><span class="nav-icon">👤</span>마이</div>
+      </div>
+    </div>
+    <div>
+      <div class="comp-label" style="font-size:10px;font-weight:700;color:#aaa;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;">Time-Based Theme</div>
+      <div class="row" style="gap:12px;">
+        <div class="theme-card">
+          <div class="theme-header" style="background:#B8FF4F;">🌅</div>
+          <div class="theme-body">
+            <div class="theme-name">오전 Morning</div>
+            <div class="theme-time">06:00 – 12:00</div>
+            <div class="theme-color">#B8FF4F</div>
+          </div>
+        </div>
+        <div class="theme-card">
+          <div class="theme-header" style="background:#FF6B2B;">☀️</div>
+          <div class="theme-body">
+            <div class="theme-name">오후 Afternoon</div>
+            <div class="theme-time">12:00 – 18:00</div>
+            <div class="theme-color">#FF6B2B</div>
+          </div>
+        </div>
+        <div class="theme-card">
+          <div class="theme-header" style="background:#7B4FFF;">🌙</div>
+          <div class="theme-body">
+            <div class="theme-name">저녁 Evening</div>
+            <div class="theme-time">18:00 – 06:00</div>
+            <div class="theme-color">#7B4FFF</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

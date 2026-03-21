@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Revitt Wireframes</title>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F5F5F5; font-family: Arial, sans-serif; padding: 40px; display: flex; gap: 24px; flex-wrap: wrap; }
+
+  .screen { width: 375px; background: #fff; border: 2px solid #222; flex-shrink: 0; }
+  .screen-title { background: #222; color: #fff; font-size: 12px; font-weight: bold; padding: 6px 12px; letter-spacing: 0.05em; }
+
+  /* COMMON */
+  .bar { background: #E0E0E0; display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; font-size: 11px; color: #666; border-bottom: 1px solid #ccc; }
+  .box { background: #E8E8E8; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #555; text-align: center; }
+  .box.dark { background: #333; color: #fff; }
+  .box.mid { background: #bbb; color: #333; }
+  .row { display: flex; gap: 8px; }
+  .label { font-size: 11px; color: #333; padding: 6px 12px; font-weight: bold; }
+  .sublabel { font-size: 10px; color: #888; padding: 2px 12px 8px; }
+  .divider { height: 1px; background: #E0E0E0; margin: 0 12px; }
+  .nav { display: flex; border-top: 2px solid #222; }
+  .nav-item { flex: 1; padding: 10px 4px; text-align: center; font-size: 10px; color: #666; border-right: 1px solid #ddd; }
+  .nav-item:last-child { border-right: none; }
+  .nav-item.active { font-weight: bold; color: #222; }
+  .nav-cta { flex: 1; padding: 6px 4px 10px; text-align: center; font-size: 10px; font-weight: bold; }
+  .chip { display: inline-block; border: 1px solid #ccc; border-radius: 100px; padding: 5px 12px; font-size: 11px; color: #555; }
+  .chip.active { border-color: #222; background: #222; color: #fff; }
+  .pill-row { display: flex; gap: 6px; padding: 8px 12px; flex-wrap: wrap; }
+  .card { border: 1px solid #ccc; margin: 8px 12px; border-radius: 4px; overflow: hidden; }
+  .card-user { display: flex; align-items: center; gap: 8px; padding: 8px; }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; background: #ccc; border: 1px solid #aaa; flex-shrink: 0; }
+  .user-text { flex: 1; }
+  .user-name { font-size: 11px; font-weight: bold; }
+  .user-sub { font-size: 10px; color: #888; }
+  .reaction-row { display: flex; gap: 6px; padding: 6px 8px 8px; }
+  .reaction { border: 1px solid #ccc; border-radius: 100px; padding: 4px 10px; font-size: 10px; color: #555; }
+</style>
+</head>
+<body>
+
+<!-- 1. SPLASH -->
+<div class="screen">
+  <div class="screen-title">01 · 스플래시</div>
+  <div style="height:200px;" class="box dark">로고 + 캐릭터<br>(브랜드 아이덴티티)</div>
+  <div style="height:80px;" class="box">슬로건 텍스트</div>
+  <div style="padding:16px;display:flex;flex-direction:column;gap:8px;">
+    <div style="height:48px;" class="box dark">카카오로 시작하기</div>
+    <div style="height:48px;" class="box">다른 방법으로 시작하기</div>
+    <div style="height:20px;" class="box" style="background:none;border:none;font-size:10px;">이용약관 · 개인정보처리방침</div>
+  </div>
+  <div style="height:300px;" class="box" style="background:#fff;border:none;"></div>
+</div>
+
+<!-- 2. 로그인 -->
+<div class="screen">
+  <div class="screen-title">02 · 로그인</div>
+  <div style="height:160px;" class="box">캐릭터 + 환영 텍스트</div>
+  <div style="padding:16px;display:flex;flex-direction:column;gap:8px;">
+    <div style="height:52px;" class="box">카카오 로그인</div>
+    <div style="height:52px;" class="box">Apple 로그인</div>
+    <div style="height:20px;text-align:center;font-size:11px;color:#888;display:flex;align-items:center;justify-content:center;">── 또는 ──</div>
+    <div style="height:52px;" class="box">이메일 로그인</div>
+  </div>
+  <div style="height:300px;" class="box" style="background:#fff;border:none;"></div>
+</div>
+
+<!-- 3. 카테고리 선택 -->
+<div class="screen">
+  <div class="screen-title">03 · 카테고리 선택</div>
+  <div style="padding:16px 12px 8px;">
+    <div style="font-size:10px;color:#888;margin-bottom:6px;">2 / 3 단계</div>
+    <div style="font-size:16px;font-weight:bold;margin-bottom:4px;">어떤 리뷰를 즐겨 보시나요?</div>
+    <div style="font-size:11px;color:#888;">관심 카테고리 선택</div>
+  </div>
+  <div style="padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+    <div style="height:110px;" class="box dark">음식 🍜<br>(선택됨)</div>
+    <div style="height:110px;" class="box dark">영화 🎬<br>(선택됨)</div>
+    <div style="height:110px;" class="box">도서 📚</div>
+    <div style="height:110px;" class="box" style="border-style:dashed;">+ 추후 추가</div>
+  </div>
+  <div style="padding:12px;display:flex;flex-direction:column;gap:8px;">
+    <div style="font-size:10px;text-align:center;color:#888;">나중에 언제든 바꿀 수 있어요</div>
+    <div style="height:48px;" class="box dark">시작하기</div>
+  </div>
+</div>
+
+<!-- 4. 홈 피드 -->
+<div class="screen">
+  <div class="screen-title">04 · 홈 피드</div>
+  <div class="bar"><span>9:41</span><span>● ● ● 🔋</span></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;">
+    <div style="font-size:16px;font-weight:bold;">Revitt</div>
+    <div style="display:flex;gap:8px;">
+      <div style="width:32px;height:32px;" class="box">🔍</div>
+      <div style="width:32px;height:32px;" class="box">🔔</div>
+    </div>
+  </div>
+  <!-- 무드 배너 -->
+  <div style="margin:0 12px;height:44px;" class="box mid">🌧️ 실시간 무드 배너 — "지금 이 순간의 분위기"</div>
+  <!-- 탭 -->
+  <div class="pill-row">
+    <span class="chip active">전체</span>
+    <span class="chip">음식</span>
+    <span class="chip">영화</span>
+    <span class="chip">도서</span>
+  </div>
+  <div style="padding:4px 12px 6px;font-size:10px;color:#888;">● 실시간 · 247명 리뷰 중</div>
+  <!-- Card 1 -->
+  <div class="card">
+    <div class="card-user">
+      <div class="avatar"></div>
+      <div class="user-text"><div class="user-name">닉네임</div><div class="user-sub">방금 · 위치</div></div>
+      <div style="font-size:10px;border:1px solid #ccc;padding:3px 8px;border-radius:100px;">음식</div>
+    </div>
+    <div style="height:160px;" class="box">이미지 / 영상<br><span style="font-size:10px;">(공유욕구 배지)</span></div>
+    <div style="padding:8px;font-size:11px;color:#555;">리뷰 텍스트 (선택)</div>
+    <div class="reaction-row">
+      <div class="reaction">🙋 나도!</div>
+      <div class="reaction">✅ 다녀왔어요</div>
+      <div class="reaction">📌 가고싶다</div>
+    </div>
+  </div>
+  <!-- Card 2 -->
+  <div class="card">
+    <div class="card-user">
+      <div class="avatar"></div>
+      <div class="user-text"><div class="user-name">닉네임</div><div class="user-sub">3분 전</div></div>
+      <div style="font-size:10px;border:1px solid #ccc;padding:3px 8px;border-radius:100px;">영화</div>
+    </div>
+    <div style="height:120px;" class="box">이미지 / 영상</div>
+    <div class="reaction-row">
+      <div class="reaction">🙋 나도!</div>
+      <div class="reaction">✅ 다녀왔어요</div>
+      <div class="reaction">📌 가고싶다</div>
+    </div>
+  </div>
+  <div class="nav">
+    <div class="nav-item active">🏠<br>홈</div>
+    <div class="nav-item">🔭<br>둘러보기</div>
+    <div class="nav-cta">
+      <div style="width:44px;height:44px;background:#333;border-radius:50%;margin:-16px auto 2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;">+</div>
+      리뷰
+    </div>
+    <div class="nav-item">🔍<br>검색</div>
+    <div class="nav-item">👤<br>마이</div>
+  </div>
+</div>
+
+<!-- 5. 리뷰 작성 -->
+<div class="screen">
+  <div class="screen-title">05 · 리뷰 작성</div>
+  <div class="bar"><span>9:41</span><span>● ● ● 🔋</span></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;">
+    <div style="font-size:12px;color:#888;">취소</div>
+    <div style="font-size:14px;font-weight:bold;">리뷰 남기기</div>
+    <div style="font-size:12px;font-weight:bold;">올리기</div>
+  </div>
+  <div style="margin:8px 12px;height:200px;" class="box">📷 사진 / 영상 업로드<br><span style="font-size:10px;">최대 5장 · 영상 60초</span></div>
+  <div class="label">카테고리</div>
+  <div class="pill-row">
+    <span class="chip active">음식</span>
+    <span class="chip">영화</span>
+    <span class="chip">도서</span>
+  </div>
+  <div class="label">장소 태그</div>
+  <div style="margin:4px 12px 0;height:44px;" class="box">📍 장소 검색 (카카오맵 / 네이버맵)</div>
+  <div class="label">감상 <span style="font-weight:normal;color:#888;">(선택)</span></div>
+  <div style="margin:4px 12px 0;height:72px;" class="box">텍스트 입력 · 300자</div>
+  <div class="label">이 경험, 얼마나 알리고 싶어?</div>
+  <div style="padding:4px 12px;display:flex;flex-direction:column;gap:6px;">
+    <div style="height:44px;" class="box">🤫 나만 알고 싶어</div>
+    <div style="height:44px;" class="box">🙋 친한 친구한테만</div>
+    <div style="height:44px;" class="box dark">📢 다 알았으면 좋겠어 (선택됨)</div>
+    <div style="height:44px;" class="box">🔥 온 세상이 알아야 해</div>
+  </div>
+  <div style="margin:12px;height:48px;" class="box dark">리뷰 올리기</div>
+</div>
+
+<!-- 6. 상세 페이지 -->
+<div class="screen">
+  <div class="screen-title">06 · 상세 페이지</div>
+  <div style="position:relative;">
+    <div style="height:320px;" class="box mid">풀스크린 이미지 / 영상<br><span style="font-size:10px;">[공유욕구 배지]</span></div>
+    <div style="position:absolute;top:8px;left:8px;padding:4px 10px;background:#fff;border:1px solid #ccc;font-size:10px;">← 뒤로</div>
+    <div style="position:absolute;top:8px;right:8px;display:flex;gap:6px;">
+      <div style="padding:4px 10px;background:#fff;border:1px solid #ccc;font-size:10px;">공유</div>
+      <div style="padding:4px 10px;background:#fff;border:1px solid #ccc;font-size:10px;">⋯</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;padding:12px;">
+    <div class="avatar"></div>
+    <div style="flex:1;">
+      <div style="font-size:12px;font-weight:bold;">닉네임 · 칭호</div>
+      <div style="font-size:10px;color:#888;">방금 · 위치</div>
+    </div>
+    <div style="padding:6px 14px;border:1px solid #222;font-size:11px;font-weight:bold;">팔로우</div>
+  </div>
+  <div style="padding:0 12px 8px;font-size:11px;color:#555;">📍 장소명</div>
+  <div style="padding:0 12px 12px;font-size:12px;color:#444;line-height:1.6;">리뷰 텍스트 본문...</div>
+  <div class="divider"></div>
+  <div class="reaction-row" style="padding:10px 12px;">
+    <div class="reaction">🙋 나도! 42</div>
+    <div class="reaction">✅ 다녀왔어요 18</div>
+    <div class="reaction">📌 가고싶다 97</div>
+  </div>
+  <div class="divider"></div>
+  <div class="label">댓글 12개</div>
+  <div style="padding:8px 12px;display:flex;flex-direction:column;gap:8px;">
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <div class="avatar"></div>
+      <div style="flex:1;height:40px;" class="box" style="background:#f5f5f5;">댓글 내용</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <div class="avatar"></div>
+      <div style="flex:1;height:40px;" class="box" style="background:#f5f5f5;">댓글 내용</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;padding:8px 12px;border-top:1px solid #ddd;">
+    <div style="flex:1;height:40px;" class="box">댓글 입력...</div>
+    <div style="width:40px;height:40px;" class="box dark">↑</div>
+  </div>
+</div>
+
+<!-- 7. 둘러보기 -->
+<div class="screen">
+  <div class="screen-title">07 · 둘러보기</div>
+  <div class="bar"><span>9:41</span><span>● ● ● 🔋</span></div>
+  <div style="padding:12px 12px 0;font-size:16px;font-weight:bold;">둘러보기</div>
+  <div class="label">지금 뜨는 리뷰</div>
+  <div style="margin:0 12px;height:160px;" class="box mid">큐레이션 카드 (대형)</div>
+  <div class="label">인기 리뷰어</div>
+  <div style="display:flex;gap:8px;padding:4px 12px 8px;overflow-x:auto;">
+    <div style="width:72px;flex-shrink:0;text-align:center;">
+      <div style="width:56px;height:56px;margin:0 auto 4px;" class="box mid"></div>
+      <div style="font-size:10px;">닉네임</div>
+      <div style="font-size:9px;color:#888;">칭호</div>
+    </div>
+    <div style="width:72px;flex-shrink:0;text-align:center;">
+      <div style="width:56px;height:56px;margin:0 auto 4px;" class="box mid"></div>
+      <div style="font-size:10px;">닉네임</div>
+      <div style="font-size:9px;color:#888;">칭호</div>
+    </div>
+    <div style="width:72px;flex-shrink:0;text-align:center;">
+      <div style="width:56px;height:56px;margin:0 auto 4px;" class="box mid"></div>
+      <div style="font-size:10px;">닉네임</div>
+      <div style="font-size:9px;color:#888;">칭호</div>
+    </div>
+  </div>
+  <div class="label">이번 주 핫플</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:4px 12px;">
+    <div style="height:100px;" class="box">리뷰 썸네일</div>
+    <div style="height:100px;" class="box">리뷰 썸네일</div>
+    <div style="height:100px;" class="box">리뷰 썸네일</div>
+    <div style="height:100px;" class="box">리뷰 썸네일</div>
+  </div>
+  <div class="nav">
+    <div class="nav-item">🏠<br>홈</div>
+    <div class="nav-item active">🔭<br>둘러보기</div>
+    <div class="nav-cta">
+      <div style="width:44px;height:44px;background:#333;border-radius:50%;margin:-16px auto 2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;">+</div>
+      리뷰
+    </div>
+    <div class="nav-item">🔍<br>검색</div>
+    <div class="nav-item">👤<br>마이</div>
+  </div>
+</div>
+
+<!-- 8. 검색 -->
+<div class="screen">
+  <div class="screen-title">08 · 검색</div>
+  <div class="bar"><span>9:41</span><span>● ● ● 🔋</span></div>
+  <div style="margin:12px;height:44px;" class="box">🔍 검색어 입력...</div>
+  <div class="pill-row">
+    <span class="chip active">전체</span>
+    <span class="chip">음식</span>
+    <span class="chip">영화</span>
+    <span class="chip">도서</span>
+  </div>
+  <div class="label">최근 검색</div>
+  <div style="padding:4px 12px;display:flex;flex-direction:column;gap:6px;">
+    <div style="height:36px;" class="box">최근 검색어</div>
+    <div style="height:36px;" class="box">최근 검색어</div>
+    <div style="height:36px;" class="box">최근 검색어</div>
+  </div>
+  <div class="label">검색 결과</div>
+  <div class="card">
+    <div class="card-user">
+      <div class="avatar"></div>
+      <div class="user-text"><div class="user-name">닉네임</div><div class="user-sub">위치 · 시간</div></div>
+    </div>
+    <div style="height:100px;" class="box">썸네일</div>
+  </div>
+  <div class="card">
+    <div class="card-user">
+      <div class="avatar"></div>
+      <div class="user-text"><div class="user-name">닉네임</div><div class="user-sub">위치 · 시간</div></div>
+    </div>
+    <div style="height:100px;" class="box">썸네일</div>
+  </div>
+  <div class="nav">
+    <div class="nav-item">🏠<br>홈</div>
+    <div class="nav-item">🔭<br>둘러보기</div>
+    <div class="nav-cta">
+      <div style="width:44px;height:44px;background:#333;border-radius:50%;margin:-16px auto 2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;">+</div>
+      리뷰
+    </div>
+    <div class="nav-item active">🔍<br>검색</div>
+    <div class="nav-item">👤<br>마이</div>
+  </div>
+</div>
+
+<!-- 9. 마이페이지 -->
+<div class="screen">
+  <div class="screen-title">09 · 마이페이지</div>
+  <div class="bar"><span>9:41</span><span>● ● ● 🔋</span></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;">
+    <div style="font-size:16px;font-weight:bold;">마이페이지</div>
+    <div style="width:32px;height:32px;" class="box">⚙️</div>
+  </div>
+  <div style="display:flex;gap:12px;padding:0 12px;">
+    <div style="width:72px;height:72px;border-radius:50%;" class="box mid">아바타</div>
+    <div style="flex:1;">
+      <div style="font-size:14px;font-weight:bold;margin-bottom:4px;">닉네임</div>
+      <div style="font-size:11px;color:#888;margin-bottom:8px;">한 줄 소개</div>
+      <div style="height:30px;width:90px;" class="box">프로필 수정</div>
+    </div>
+  </div>
+  <div style="display:flex;margin:12px;border:1px solid #ccc;">
+    <div style="flex:1;padding:12px;text-align:center;border-right:1px solid #ccc;">
+      <div style="font-size:18px;font-weight:bold;">47</div>
+      <div style="font-size:10px;color:#888;">리뷰</div>
+    </div>
+    <div style="flex:1;padding:12px;text-align:center;border-right:1px solid #ccc;">
+      <div style="font-size:18px;font-weight:bold;">128</div>
+      <div style="font-size:10px;color:#888;">팔로워</div>
+    </div>
+    <div style="flex:1;padding:12px;text-align:center;">
+      <div style="font-size:18px;font-weight:bold;">89</div>
+      <div style="font-size:10px;color:#888;">팔로잉</div>
+    </div>
+  </div>
+  <div class="label">현재 칭호</div>
+  <div style="margin:4px 12px 0;height:56px;" class="box mid">칭호명 · 희소성% · 변경 버튼</div>
+  <div class="label">내 리뷰</div>
+  <div style="display:flex;gap:0;border-bottom:1px solid #ddd;padding:0 12px;">
+    <div style="flex:1;padding:8px;text-align:center;font-size:12px;font-weight:bold;border-bottom:2px solid #222;">전체</div>
+    <div style="flex:1;padding:8px;text-align:center;font-size:12px;color:#888;">음식</div>
+    <div style="flex:1;padding:8px;text-align:center;font-size:12px;color:#888;">영화</div>
+    <div style="flex:1;padding:8px;text-align:center;font-size:12px;color:#888;">도서</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;padding:2px 12px;">
+    <div style="aspect-ratio:1;" class="box">🍜</div>
+    <div style="aspect-ratio:1;" class="box">🎬</div>
+    <div style="aspect-ratio:1;" class="box">📚</div>
+    <div style="aspect-ratio:1;" class="box">🍣</div>
+    <div style="aspect-ratio:1;" class="box">🎭</div>
+    <div style="aspect-ratio:1;" class="box">☕</div>
+  </div>
+  <div class="nav">
+    <div class="nav-item">🏠<br>홈</div>
+    <div class="nav-item">🔭<br>둘러보기</div>
+    <div class="nav-cta">
+      <div style="width:44px;height:44px;background:#333;border-radius:50%;margin:-16px auto 2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;">+</div>
+      리뷰
+    </div>
+    <div class="nav-item">🔍<br>검색</div>
+    <div class="nav-item active">👤<br>마이</div>
+  </div>
+</div>
+
+</body>
+</html>
