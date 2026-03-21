@@ -23,22 +23,36 @@ async function loadFiles() {
     list.innerHTML = "";
 
     files.forEach(file => {
-      const { base, ext } = splitName(file.name);
-
       const div = document.createElement("div");
       div.className = "item";
 
-      div.innerHTML = `
-        <div class="left">
-          <input type="checkbox" class="file-check" value="${file.download_url}" onchange="updateSelectedCount()">
-
-          <div class="file-name">
-            <span class="name-base">${base}</span><span class="name-ext">${ext}</span>
+      // 📁 폴더 처리
+      if (file.type === "dir") {
+        div.innerHTML = `
+          <div class="left">
+            <div class="file-name">📁 ${file.name}</div>
           </div>
-        </div>
 
-        <a class="btn" href="${file.download_url}">Download</a>
-      `;
+          <span class="folder-label">Folder</span>
+        `;
+      }
+
+      // 📄 파일 처리
+      else {
+        const { base, ext } = splitName(file.name);
+
+        div.innerHTML = `
+          <div class="left">
+            <input type="checkbox" class="file-check" value="${file.download_url}" onchange="updateSelectedCount()">
+
+            <div class="file-name">
+              <span class="name-base">${base}</span><span class="name-ext">${ext}</span>
+            </div>
+          </div>
+
+          <a class="btn" href="${file.download_url}">Download</a>
+        `;
+      }
 
       list.appendChild(div);
     });
