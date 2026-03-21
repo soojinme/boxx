@@ -14,7 +14,18 @@ function splitName(name) {
   };
 }
 
-// 폴더 안 파일 개수 가져오기
+// 🔥 단일 파일 강제 다운로드
+function downloadFile(url) {
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "";
+  a.target = "_self";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+// 폴더 안 파일 개수
 async function getFolderCount(path) {
   try {
     const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`);
@@ -37,12 +48,7 @@ async function downloadFolder(folderName) {
       .filter(f => f.type === "file")
       .forEach(file => {
         setTimeout(() => {
-          const a = document.createElement("a");
-          a.href = file.download_url;
-          a.download = "";
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
+          downloadFile(file.download_url);
         }, index * 400);
 
         index++;
@@ -98,7 +104,9 @@ async function loadFiles() {
             </div>
           </div>
 
-          <a class="btn" href="${file.download_url}">Download</a>
+          <button class="btn" onclick="downloadFile('${file.download_url}')">
+            Download
+          </button>
         `;
       }
 
@@ -134,12 +142,7 @@ function downloadSelected() {
 
   checked.forEach((el, index) => {
     setTimeout(() => {
-      const a = document.createElement("a");
-      a.href = el.value;
-      a.download = "";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      downloadFile(el.value);
     }, index * 400);
   });
 }
