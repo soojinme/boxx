@@ -3,7 +3,7 @@ const repo = "boxx";
 
 const downloadBtn = () => document.querySelector(".top-right .btn");
 
-// 🔥 파일명 분리 (확장자 유지)
+// 파일명 분리
 function splitName(name) {
   const lastDot = name.lastIndexOf(".");
   if (lastDot === -1) return { base: name, ext: "" };
@@ -14,6 +14,18 @@ function splitName(name) {
   };
 }
 
+// 📁 폴더 내부 파일 개수 가져오기
+async function getFolderCount(path) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`);
+    const data = await res.json();
+
+    return data.filter(f => f.type === "file").length;
+  } catch {
+    return "";
+  }
+}
+
 async function loadFiles() {
   try {
     const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/files`);
@@ -22,22 +34,27 @@ async function loadFiles() {
     const list = document.getElementById("fileList");
     list.innerHTML = "";
 
-    files.forEach(file => {
+    for (const file of files) {
       const div = document.createElement("div");
       div.className = "item";
 
-      // 📁 폴더 처리
+      // 📁 폴더
       if (file.type === "dir") {
+        const count = await getFolderCount(`files/${file.name}`);
+
         div.innerHTML = `
           <div class="left">
-            <div class="file-name">📁 ${file.name}</div>
+            <div class="file-name">
+              📁 ${file.name}
+              <span class="file-count">(${count} files)</span>
+            </div>
           </div>
 
-          <span class="folder-label">Folder</span>
+          <a class="btn" href="${file.html_url}" target="_blank">Open</a>
         `;
       }
 
-      // 📄 파일 처리
+      // 📄 파일
       else {
         const { base, ext } = splitName(file.name);
 
@@ -55,7 +72,7 @@ async function loadFiles() {
       }
 
       list.appendChild(div);
-    });
+    }
 
     updateSelectedCount();
 
