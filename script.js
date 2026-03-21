@@ -3,6 +3,7 @@ const repo = "boxx";
 
 const downloadBtn = () => document.querySelector(".top-right .btn");
 
+// 파일명 분리 (확장자 유지)
 function splitName(name) {
   const lastDot = name.lastIndexOf(".");
   if (lastDot === -1) return { base: name, ext: "" };
@@ -13,7 +14,7 @@ function splitName(name) {
   };
 }
 
-// 🔥 폴더 안 파일 개수 가져오기
+// 폴더 안 파일 개수 가져오기
 async function getFolderCount(path) {
   try {
     const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`);
@@ -21,6 +22,34 @@ async function getFolderCount(path) {
     return data.filter(f => f.type === "file").length;
   } catch {
     return "";
+  }
+}
+
+// 🔥 폴더 전체 다운로드
+async function downloadFolder(folderName) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/files/${folderName}`);
+    const files = await res.json();
+
+    let index = 0;
+
+    files
+      .filter(f => f.type === "file")
+      .forEach(file => {
+        setTimeout(() => {
+          const a = document.createElement("a");
+          a.href = file.download_url;
+          a.download = "";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, index * 400);
+
+        index++;
+      });
+
+  } catch (e) {
+    alert("폴더 다운로드 실패");
   }
 }
 
@@ -42,13 +71,17 @@ async function loadFiles() {
 
         div.innerHTML = `
           <div class="left">
+            <input type="checkbox" onclick="downloadFolder('${file.name}')">
+
             <div class="file-name">
               📁 ${file.name}
               <span class="file-count">(${count} files)</span>
             </div>
           </div>
 
-          <a class="btn" href="${file.html_url}" target="_blank">Open</a>
+          <button class="btn" onclick="downloadFolder('${file.name}')">
+            Download
+          </button>
         `;
       }
 
