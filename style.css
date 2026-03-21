@@ -140,9 +140,18 @@ input[type="checkbox"]:checked::after {
 /* 모바일 최적화 */
 @media (max-width: 500px) {
   .item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    flex-direction: row;       /* 🔥 가로 유지 */
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .left {
+    flex: 1;
+    min-width: 0;              /* 🔥 ellipsis 필수 */
+  }
+
+  .file-name {
+    max-width: 100%;
   }
 }
 
