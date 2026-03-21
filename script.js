@@ -3,7 +3,6 @@ const repo = "boxx";
 
 const downloadBtn = () => document.querySelector(".top-right .btn");
 
-// 파일명 분리
 function splitName(name) {
   const lastDot = name.lastIndexOf(".");
   if (lastDot === -1) return { base: name, ext: "" };
@@ -14,12 +13,11 @@ function splitName(name) {
   };
 }
 
-// 📁 폴더 내부 파일 개수 가져오기
+// 🔥 폴더 안 파일 개수 가져오기
 async function getFolderCount(path) {
   try {
     const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`);
     const data = await res.json();
-
     return data.filter(f => f.type === "file").length;
   } catch {
     return "";
