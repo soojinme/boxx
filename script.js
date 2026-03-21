@@ -3,7 +3,7 @@ const repo = "boxx";
 
 const downloadBtn = () => document.querySelector(".top-right .btn");
 
-// 파일명 분리 (확장자 유지)
+// 파일명 분리
 function splitName(name) {
   const lastDot = name.lastIndexOf(".");
   if (lastDot === -1) return { base: name, ext: "" };
@@ -14,18 +14,33 @@ function splitName(name) {
   };
 }
 
-// 🔥 단일 파일 강제 다운로드
-function downloadFile(url) {
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "";
-  a.target = "_self";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+// 🔥 파일 다운로드 (blob + fallback)
+async function downloadFile(url, filename = "") {
+  try {
+    const res = await fetch(url);
+
+    // 실패하면 fallback
+    if (!res.ok) throw new Error();
+
+    const blob = await res.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = filename || "download";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    window.URL.revokeObjectURL(blobUrl);
+
+  } catch (e) {
+    // 🔥 fallback: 그냥 열기
+    window.open(url, "_blank");
+  }
 }
 
-// 폴더 안 파일 개수
+// 폴더 파일 개수
 async function getFolderCount(path) {
   try {
     const res = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`);
@@ -48,8 +63,8 @@ async function downloadFolder(folderName) {
       .filter(f => f.type === "file")
       .forEach(file => {
         setTimeout(() => {
-          downloadFile(file.download_url);
-        }, index * 400);
+          downloadFile(file.download_url, file.name);
+        }, index * 500);
 
         index++;
       });
@@ -104,7 +119,7 @@ async function loadFiles() {
             </div>
           </div>
 
-          <button class="btn" onclick="downloadFile('${file.download_url}')">
+          <button class="btn" onclick="downloadFile('${file.download_url}', '${file.name}')">
             Download
           </button>
         `;
@@ -143,7 +158,7 @@ function downloadSelected() {
   checked.forEach((el, index) => {
     setTimeout(() => {
       downloadFile(el.value);
-    }, index * 400);
+    }, index * 500);
   });
 }
 
